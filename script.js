@@ -1,6 +1,26 @@
 // Wrap all code that interacts with the DOM in a call to jQuery to ensure that
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
+var currentDay = $("#currentDay")
+var currentDate = dayjs()
+var currentTime = dayjs().format("H")
+var timeBlocks = $(".time-block")
+var count = 9
+
+timeBlocks.each(function(){
+  if (count < currentTime) {
+    $(this).addClass("past")
+  } else if (count == currentTime) {
+    $(this).addClass("present")
+  } else {
+    $(this).addClass("future")
+  }
+  count++
+})
+
+// make it so the th rd or st is correct
+currentDay.text(currentDate.format("dddd, MMMM D[th]"))
+
 $(function () {
   // TODO: Add a listener for click events on the save button. This code should
   // use the id in the containing time-block as a key to save the user input in
